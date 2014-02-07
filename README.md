@@ -30,6 +30,20 @@ credentials and calls `done` providing a user.
       }
     ));
 
+##### To make *apikey* optional (in case you are using more then one strategy)
+
+This will tell Local API Key strategy to skip authentication if *apikey* is not found
+in headers, query string or request body. If you have secondary authentication via,
+for example, username and password using sessions, set *optionalApiKey*  option to
+*true* to keep user logged in when *apikey* is not passed.
+
+    passport.use(new LocalAPIKeyStrategy({
+        optionalApiKey: true
+      }, function(apikey, done) {
+        [...]
+      }
+    ));
+
 #### Authenticate Requests
 
 Use `passport.authenticate()`, specifying the `'localapikey'` strategy, to
